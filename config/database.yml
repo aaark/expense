@@ -1,0 +1,27 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  database: expense
+  username: postgres 
+  password: rahul
+  port: 5432
+
+production:
+  <<: *default
+  database: expense_production
+  username: postgres 
+  password: postgres
+  port: 5432
+
+test:
+  <<: *default
+  database: expense_test
+  username: postgres 
+  password: rahul
+  port: 5432
