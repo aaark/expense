@@ -3,35 +3,15 @@
     <nav class="navbar navbar-inverse navbar-custom">
     <div class="container-fluid">
     <div class="navbar-header">
-    <a class="navbar-brand" href="#">Factory</a>
+    <a class="navbar-brand" href="#">Expense</a>
         </div>
     <ul class="nav navbar-nav">
-      
-      
-        <%if logged_in? == true%>
-          <li>    <%= link_to ' Home', user_path(current_user) %></li>
-          <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Operations
-          <span class="caret"></span></a>
-            <ul class= "dropdown-menu">
-              <% if current_user.admin == true  %>
-
-                <li>    <%= link_to 'Create new user', new_user_path %></li>
-                <li><%= link_to 'See Users', users_path %></li>
-                <li><%= link_to 'See vehicles', vehicles_path %></li>
-                 <li><%= link_to 'Add vehicles', new_vehicle_path, 'data-no-turbolink': true%></li>
-                <li><%= link_to 'Transfer Your Admnstration', transfer_user_path(current_user) %></li>
-              <%end%>    
-              <li><%= link_to 'Add your Vehicle', add_vehicle_to_list_vehicle_path(current_user) %></li>
-              <li><%= link_to 'Change Password', users_change_pass_path%></li>
-            </ul>
-          </li>  
-        <%end%>
+        <li style="color:white; padding-top: 15px;"> <%= link_to 'incomes', incomes_path%></li>
+        <li style="color:white; padding-top: 15px;"> <%= link_to 'expenditures', expenditures_path%></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              
             <span class="caret"></span></a>
             <ul class= "dropdown-menu accountmenu">
 
@@ -40,25 +20,16 @@
               <li>&nbsp; &nbsp;Email: &nbsp;</li>
              
               <li>&nbsp; &nbsp;Role: &nbsp; Admin</li>
-             
             </ul>
           </li>      
              <li><
-              <span class="glyphicon glyphicon-log-out"> Log out</span>
-              <%end%>
+              <span class="glyphicon glyphicon-log-out"  style="color:white; padding-top: 15px;"> Log out</span>
               </li> 
-
-        <%else%>
             <li>
-              <span class="glyphicon glyphicon-log-in"> Login</span>
-              <%end%>
-              </li>
-        <%end%>      
+              <span class="glyphicon glyphicon-log-in"  style="color:white; padding-top: 15px;"> Login</span>
+            </li>
     </ul>
-
-
   </div>
 </nav>
- 
   </div>
 </header>
