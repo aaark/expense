@@ -20,15 +20,17 @@ class IncomesController < ApplicationController
 
   # GET /incomes/1/edit
   def edit
+    @income.cat = @income.category.title
   end
 
   # POST /incomes
   # POST /incomes.json
   def create
-    @income = Income.new(income_params)
+    @income = Income.new(income_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @income.save
+        Category.create(title: params[:income][:cat], categorizable_type: 'Income', categorizable_id: @income.id)
         format.html { redirect_to @income, notice: 'Income was successfully created.' }
         format.json { render :show, status: :created, location: @income }
       else
@@ -43,6 +45,7 @@ class IncomesController < ApplicationController
   def update
     respond_to do |format|
       if @income.update(income_params)
+        @income.category.update_attributes!(title: params[:income][:cat])
         format.html { redirect_to @income, notice: 'Income was successfully updated.' }
         format.json { render :show, status: :ok, location: @income }
       else

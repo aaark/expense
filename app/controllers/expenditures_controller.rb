@@ -19,15 +19,17 @@ class ExpendituresController < ApplicationController
 
   # GET /expenditures/1/edit
   def edit
+    @expenditure.cat = @expenditure.category.title
   end
 
   # POST /expenditures
   # POST /expenditures.json
   def create
-    @expenditure = Expenditure.new(expenditure_params)
+    @expenditure = Expenditure.new(expenditure_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @expenditure.save
+        Category.create(title: params[:expenditure][:cat], categorizable_type: 'Expenditure', categorizable_id: @expenditure.id)
         format.html { redirect_to @expenditure, notice: 'Expenditure was successfully created.' }
         format.json { render :show, status: :created, location: @expenditure }
       else
@@ -42,6 +44,7 @@ class ExpendituresController < ApplicationController
   def update
     respond_to do |format|
       if @expenditure.update(expenditure_params)
+        @expenditure.category.update_attributes!(title: params[:expenditure][:cat])
         format.html { redirect_to @expenditure, notice: 'Expenditure was successfully updated.' }
         format.json { render :show, status: :ok, location: @expenditure }
       else
